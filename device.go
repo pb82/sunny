@@ -72,13 +72,13 @@ func (c *Connection) NewDevice(address, password string) (*Device, error) {
 		// check for timeout
 		select {
 		case <-ctx.Done():
-			return nil, fmt.Errorf("no ping response for %s", address)
+			return nil, fmt.Errorf("no Speedwire ping response for %s", address)
 		default:
 		}
 
 		err = device.sendDeviceData(pingData)
 		if err != nil {
-			Log.Printf("failed to send ping request for %s", address)
+			Log.Printf("failed to send Speedwire ping request for %s", address)
 			return nil, err
 		}
 
