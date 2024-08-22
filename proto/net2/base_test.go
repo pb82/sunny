@@ -40,6 +40,30 @@ func TestDeviceId_Write(t *testing.T) {
 	}, id.Bytes(binary.LittleEndian))
 }
 
+func BenchmarkDeviceId_Write_Big(b *testing.B) {
+	id := DeviceId{
+		SusyID:       0x1234,
+		SerialNumber: 0x12345678,
+	}
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		id.Bytes(binary.BigEndian)
+	}
+}
+
+func BenchmarkDeviceId_Write_Little(b *testing.B) {
+	id := DeviceId{
+		SusyID:       0x1234,
+		SerialNumber: 0x12345678,
+	}
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		id.Bytes(binary.LittleEndian)
+	}
+}
+
 func TestDeviceId_Read(t *testing.T) {
 	ass := assert.New(t)
 
@@ -62,6 +86,29 @@ func TestDeviceId_Read(t *testing.T) {
 	}, binary.LittleEndian))
 	ass.Equal(uint16(0x3412), id.SusyID)
 	ass.Equal(uint32(0x78563412), id.SerialNumber)
+}
+
+func BenchmarkDeviceId_Read_Big(b *testing.B) {
+	id := new(DeviceId)
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		_ = id.Read([]byte{
+			0x12, 0x34,
+			0x12, 0x34, 0x56, 0x78,
+		}, binary.BigEndian)
+	}
+}
+func BenchmarkDeviceId_Read_Little(b *testing.B) {
+	id := new(DeviceId)
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		_ = id.Read([]byte{
+			0x12, 0x34,
+			0x12, 0x34, 0x56, 0x78,
+		}, binary.LittleEndian)
+	}
 }
 
 func TestLocalDeviceId(t *testing.T) {
