@@ -17,6 +17,7 @@ package sunny
 import (
 	"fmt"
 	"net"
+	"slices"
 	"sync"
 
 	"gitlab.com/bboehmke/sunny/proto"
@@ -143,15 +144,12 @@ func (c *Connection) unregisterReceiver(srcIp string, ch chan *proto.Packet) {
 
 	receivers, ok := c.receiverChannels[srcIp]
 	if !ok {
-		return // IP not in in list -> no channel to unregister
+		return // IP not in list -> no channel to unregister
 	}
 
-	c.receiverChannels[srcIp] = make([]chan *proto.Packet, len(receivers))
-	for i, receiver := range receivers {
-		if receiver != ch {
-			c.receiverChannels[srcIp][i] = receiver
-		}
-	}
+	c.receiverChannels[srcIp] = slices.DeleteFunc(receivers, func(receiver chan *proto.Packet) bool {
+		return receiver == ch
+	})
 }
 
 // handleDiscovered devices and forward IP to registered channels
@@ -181,13 +179,9 @@ func (c *Connection) unregisterDiscoverer(ch chan string) {
 	c.discoverMutex.Lock()
 	defer c.discoverMutex.Unlock()
 
-	discoverChannels := c.discoverChannels
-	c.discoverChannels = make([]chan string, len(discoverChannels))
-	for i, entry := range discoverChannels {
-		if entry != ch {
-			c.discoverChannels[i] = entry
-		}
-	}
+	c.discoverChannels = slices.DeleteFunc(c.discoverChannels, func(entry chan string) bool {
+		return entry == ch
+	})
 }
 
 // sendPacket to the given address
