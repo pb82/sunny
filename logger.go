@@ -14,6 +14,8 @@
 
 package sunny
 
+import "sync/atomic"
+
 // Log is used to log some internal trace messages
 var Log Logger = new(NopeLogger)
 
@@ -28,3 +30,11 @@ type NopeLogger struct{}
 
 // Printf print line to log
 func (n NopeLogger) Printf(format string, v ...interface{}) {}
+
+// DetailedPacketLogging if set will enable more detailed logging of received and dropped packets
+var DetailedPacketLogging atomic.Bool
+
+// EnableDetailedPacketLogging to log received and dropped packets
+func EnableDetailedPacketLogging(enable bool) {
+	DetailedPacketLogging.Store(enable)
+}

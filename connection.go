@@ -97,6 +97,9 @@ func (c *Connection) listenLoop() {
 		n, src, err := c.socket.ReadFromUDP(b)
 		if err != nil {
 			// failed to read from udp -> retry
+			if DetailedPacketLogging.Load() {
+				Log.Printf("DBG: UDP read failed: %v", err)
+			}
 			continue
 		}
 
@@ -125,6 +128,9 @@ func (c *Connection) handlePackets(srcIp string, packet *proto.Packet) {
 		case ch <- packet:
 		default:
 			// channel for received packets busy -> drop packet
+			if DetailedPacketLogging.Load() {
+				Log.Printf("DBG: receiver channel busy -> drop packet from %s: [%s]", srcIp, packet)
+			}
 		}
 	}
 }
@@ -162,6 +168,9 @@ func (c *Connection) handleDiscovered(srcIp string) {
 		case ch <- srcIp:
 		default:
 			// channel for received packets busy -> drop packet
+			if DetailedPacketLogging.Load() {
+				Log.Printf("DBG: discover channel busy -> skip notify for %s", srcIp)
+			}
 		}
 	}
 }
