@@ -1,7 +1,7 @@
-[![pipeline status](https://gitlab.com/pb82/sunny/badges/master/pipeline.svg)](https://gitlab.com/pb82/sunny/pipelines)
-[![coverage report](https://gitlab.com/pb82/sunny/badges/master/coverage.svg)](https://gitlab.com/pb82/sunny)
-[![godoc](https://godoc.org/gitlab.com/pb82/sunny?status.svg)](https://godoc.org/gitlab.com/pb82/sunny) 
-[![Go Report Card](https://goreportcard.com/badge/gitlab.com/pb82/sunny)](https://goreportcard.com/report/gitlab.com/pb82/sunny)
+[![pipeline status](https://github.com/pb82/sunny/badges/master/pipeline.svg)](https://github.com/pb82/sunny/pipelines)
+[![coverage report](https://github.com/pb82/sunny/badges/master/coverage.svg)](https://github.com/pb82/sunny)
+[![godoc](https://godoc.org/github.com/pb82/sunny?status.svg)](https://godoc.org/github.com/pb82/sunny) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/pb82/sunny)](https://goreportcard.com/report/github.com/pb82/sunny)
 
 # Sunny
 
@@ -11,7 +11,7 @@ via Ethernet (Speedwire).
 > Note: SMA & Speedwire are registered trademarks by
 > [SMA Solar Technology AG](https://www.sma.de/en/company/about-sma.html)
 
-An example application can be found [here](https://gitlab.com/pb82/sunny-monitor).
+An example application can be found [here](https://github.com/pb82/sunny-monitor).
 
 ## Usage
 

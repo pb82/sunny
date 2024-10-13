@@ -18,7 +18,7 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"gitlab.com/pb82/sunny/proto/net2"
+	"github.com/pb82/sunny/proto/net2"
 )
 
 // SmaNet2SubPacket inside net2 entry

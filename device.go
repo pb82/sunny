@@ -20,8 +20,8 @@ import (
 	"net"
 	"time"
 
-	"gitlab.com/pb82/sunny/proto"
-	"gitlab.com/pb82/sunny/proto/net2"
+	"github.com/pb82/sunny/proto"
+	"github.com/pb82/sunny/proto/net2"
 )
 
 // Device instance for communication with inverter and energy meter

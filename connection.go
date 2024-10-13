@@ -20,7 +20,7 @@ import (
 	"slices"
 	"sync"
 
-	"gitlab.com/pb82/sunny/proto"
+	"github.com/pb82/sunny/proto"
 )
 
 const listenAddress = "239.12.255.254:9522"
